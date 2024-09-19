@@ -15,8 +15,8 @@ class Solution(object):
                 while (currentNum + 1) in numSet:
                     currentStreak += 1
                     currentNum += 1
-                
-                longest = max(currentStreak,longest)
+                if currentStreak > longest:
+                    longest = currentStreak
         
         return longest
         
