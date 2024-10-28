@@ -41,11 +41,15 @@ class Solution:
         first_x, first_y = -1, -1
         
         # Find any land cell, and we treat it as a cell of island A.
+        found = False
         for i in range(n):
             for j in range(n):
                 if grid[i][j] == 1:
                     first_x, first_y = i, j
+                    found = True
                     break
+            if found:
+                break
         
         # bfsQueue for BFS on land cells of island A; secondBfsQueue for BFS on water cells.
         bfs_queue = [(first_x, first_y)]
