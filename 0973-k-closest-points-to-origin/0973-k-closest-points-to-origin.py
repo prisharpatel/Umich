@@ -17,9 +17,10 @@ class Solution:
             distance = sqrt(x**2 + y**2)
 
             if len(heap) == k and heap[0][0] * -1 > distance:
-                heapq.heappop(heap)
-                
-            heapq.heappush(heap, (distance * -1, i))
+                heapq.heappop(heap)    
+                heapq.heappush(heap, (distance * -1, i))
+            elif len(heap) < k: 
+                heapq.heappush(heap, (distance * -1, i))
 
         # O(K)
         output = []
