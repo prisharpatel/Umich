@@ -1,21 +1,15 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        # sorted in ascending order 
-        # find two numbers such that they add up to target and index1 < index2 
+        low = 0
+        high = len(numbers) - 1
+        while low < high:
+            sum = numbers[low] + numbers[high]
 
-        # can't use hashmap/hashset bc cant use extra space
-
-        # sorted so binary search thing with two pointers
-
-        left = 0 
-        right = len(numbers)-1
-        while left < right: 
-            s = numbers[left] + numbers[right]
-            if s == target:
-                return [left+1, right+1]
-            elif s > target: 
-                right -=1 
-            else: 
-                left += 1
-        
-        
+            if sum == target:
+                return [low + 1, high + 1]
+            elif sum < target:
+                low += 1
+            else:
+                high -= 1
+        # In case there is no solution, return [-1, -1].
+        return [-1, -1]
