@@ -25,8 +25,8 @@ class Solution:
                     output.append(group)
                     group = []
                 group.append(totalStudents.pop())
-            if len(group) == groupSize:
-                output.append(group)
+            
+            output.append(group)
         
         
         return output
