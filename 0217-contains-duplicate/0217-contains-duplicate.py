@@ -4,6 +4,5 @@ class Solution:
         # create set - check if set as long as nums (o(N))
         # have to have it be at lesat O(N) because otherwise you can't go through all elements 
         # ==> can't optimize 
-        numsSet = set(nums)
-        return len(numsSet) != len(nums) 
+        return len(nums) != len(set(nums))
         
