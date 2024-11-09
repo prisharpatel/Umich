@@ -5,8 +5,15 @@ class Solution:
             # no duplicates
             return False
 
+        # use a hashmap to check if eleemnt exists and what index it is at if so 
+        tracker = set() 
+        
         for i in range(len(nums)):
-            for j in range(i+1, len(nums)):
-                if nums[i] == nums[j] and abs(i-j) <= k:
-                    return True 
+            if nums[i] in tracker: 
+                return True
+            tracker.add(nums[i])
+            if len(tracker) > k: 
+                tracker.remove(nums[i-k])
+            
+
         return False        
