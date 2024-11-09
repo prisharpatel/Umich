@@ -1,34 +1,19 @@
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        # return k most frequent strings in words    
+        # return k most frequent strings in words
 
-        # make a hashmap and increase the count for stirngs
-        # sort it based on values O(nlogn)
+        # max heap - storing the most frequent words
 
-        # min heap? 
-        tracker = defaultdict(int)
+        cnt = Counter(words) # O(N)
+        heap = []
         
-        for word in words:
-            tracker[word] += 1
-
-        # sort by value
-        tracker = dict(sorted(tracker.items(), key=lambda x: x[1], reverse = True)) 
-        # sort by key
-        tracker = dict(sorted(tracker.keys()))
-
-
+        for word, freq in cnt.items():
+            # add to heap based on frequency but also include the word 
+            toAdd = (-1 *freq, word)
+            heap.append(toAdd)
+        heapq.heapify(heap)
         output = []
-        for word in tracker.keys():
-            if len(output) < k: 
-                output.append(word)
-            else: 
-                break
+        for i in range(k): 
+            freq, word = heapq.heappop(heap)
+            output.append(word)
         return output
-            
-
-
-
-
-
-        
-        
