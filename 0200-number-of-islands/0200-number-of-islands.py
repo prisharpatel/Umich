@@ -1,39 +1,39 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        # 1 = land
+        # 1 = land 
         # 0 = water 
-        rows = len(grid)
-        cols = len(grid[0])
-        # return the number of islands 
+        # return the number of islands
 
-        # matching - dfs
+        # dfs
 
-        # psuedocode 
-        visited = set() # set of tuples for ordered pairs 
-        islandSize = 0
-        stack = deque() # pop left() and appendleft() - add tuples of places
-        count = 0
-
-        # see what triggers dfs and add that many to count 
-
-        
-        def dfs(i, j): 
-            if i < 0 or i >= rows or j < 0 or j >= cols or grid[i][j] != "1" or (i, j) in visited:
+        # pseudocode
+        # keep track of visited 
+        visited = set() # add coordinates 
+        # see if there is an island at every single spot as long as its not in visited and is a 1
+        m = len(grid)
+        n = len(grid[0])
+        def dfs(r, c):
+            if not (0 <= r < m) or not (0 <= c < n) or grid[r][c] == "0":
                 return 
-            visited.add((i, j))
-            dfs(i + 1, j)
-            dfs(i - 1, j)
-            dfs(i, j+1)
-            dfs(i, j-1)
             
-        for i in range(rows):
-            for j in range(cols):
-                if (i, j) not in visited and grid[i][j] == "1":
+            # visited.add((r,c))
+            # call dfs on neighbors
+            grid[r][c] = "0"
+            dfs(r+1, c)
+            dfs(r-1, c)
+            dfs(r, c+1)
+            dfs(r, c-1)
+        islands = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1":
                     dfs(i, j)
-                    count += 1
-                    
-        
+                    islands += 1
 
-        return count
+        return islands
+            
 
+            
+
+            
         
