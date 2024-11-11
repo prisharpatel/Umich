@@ -1,9 +1,8 @@
-from typing import List
-
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
         # matches[0] = winner
         # matches[1] = loser 
+
 
         # answer[0] = no matches lost 
         # answer[1] = lost one match 
@@ -11,27 +10,29 @@ class Solution:
         # keep as sets and then convert them into lists
 
         # matching - array problem, sets
-        won = set()  # add here when they win and if they lose 
-        lostAlready = set()  # track players who have lost more than once
-        lostOne = set()  # track players who lost exactly one match
+        won = set() # add here when they win and if they lose 
+        lostMultiple = set() # losingMorethanOne
+        lostOne = set() # lost one match - so if they are in this already when they lose --> remove
     
         for match in matches: 
             winner = match[0]
             loser = match[1]
 
-            if winner not in lostAlready and winner not in lostOne: 
-                # add winner to won set
+            # add winner if it isn't in lostOne or lostMultiple 
+            if winner not in lostMultiple and winner not in lostOne: 
                 won.add(winner)
-
+            
+            # loser - add to add one if its not there 
             if loser in lostOne:
-                # move loser from lostOne to lostAlready if this is their second loss
                 lostOne.remove(loser)
-                lostAlready.add(loser)
-            elif loser not in lostAlready:
-                # add loser to lostOne if it's their first loss
+                lostMultiple.add(loser)
+            elif loser not in lostMultiple: 
                 lostOne.add(loser)
-                # remove loser from won set if they were previously a winner
-                won.discard(loser)
-        
-        # Convert sets to sorted lists for the final answer
+                won.discard(loser) 
+             
+                
         return [sorted(won), sorted(lostOne)]
+            
+
+
+        
