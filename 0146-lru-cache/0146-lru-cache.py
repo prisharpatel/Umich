@@ -3,7 +3,7 @@ class LRUCache:
     def __init__(self, capacity: int):
         self.cache = {} # dictionary that stores key --> value 
         self.limit = capacity
-        self.LRU = [] # LRU is at index 0 of this
+        self.LRU = deque(maxlen=capacity) # LRU is at index 0 of this
         
 
     def get(self, key: int) -> int:
@@ -24,7 +24,7 @@ class LRUCache:
         # check if key in cache already 
         
         if len(self.cache) == self.limit and key not in self.cache: 
-            lru = self.LRU.pop(0) 
+            lru = self.LRU.popleft() 
             # how can we gaurantee that lru is in the cache?
             # only add to lru if it is put into the cache and remove now 
             self.cache.pop(lru)
